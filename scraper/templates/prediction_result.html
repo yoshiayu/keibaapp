@@ -1,0 +1,23 @@
+{% extends "base.html" %}
+
+{% block content %}
+<h1>予測結果</h1>
+
+<h2>レース名: {{ race_name }}</h2>
+<p>天気: {{ weather }}</p>
+<p>コースの状態: {{ course_condition }}</p>
+
+<h3>参加馬</h3>
+<ul>
+    {% for horse in participating_horses %}
+    <li>{{ horse }}</li>
+    {% endfor %}
+</ul>
+
+<h3>予測結果</h3>
+<p>1位: {{ prediction.first_place }}</p>
+<p>2位: {{ prediction.second_place }}</p>
+<p>3位: {{ prediction.third_place }}</p>
+
+<a href="{% url 'index' %}">トップページに戻る</a>
+{% endblock %}

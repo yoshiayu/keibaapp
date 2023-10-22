@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    {% load static %}
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>競馬予測アプリ</title>
+    <link rel="stylesheet" href="{% static 'styles.css' %}">
+</head>
+<body>
+    <h1>競馬予測アプリ</h1>
+    <a href="{% url 'predict' %}">予測ページへ</a>
+    <h2>最新のレース結果</h2>
+    <ul>
+    {% for race in races %}
+        <li>{{ race.date }}: {{ race.name }} - {{ race.result }}</li>
+    {% endfor %}
+    </ul>
+
+    <h2>最も勝率の高い馬</h2>
+    <p>{{ best_horse.name }}: 勝率 {{ best_horse.win_rate }}%</p>
+
+    <h2>予測結果</h2>
+    <table>
+        <thead>
+            <tr>
+                <th>レース名</th>
+                <th>予測1位</th>
+                <th>予測2位</th>
+                <th>予測3位</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for prediction in predictions %}
+            <tr>
+                <td>{{ prediction.race_name }}</td>
+                <td>{{ prediction.first_place }}</td>
+                <td>{{ prediction.second_place }}</td>
+                <td>{{ prediction.third_place }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
+    <h2>その他の情報</h2>
+    <p>こちらには、過去のレース結果や馬の統計情報など、ユーザーが参考にできる情報を表示します。</p>
+    <!-- 例: 過去のレース結果 -->
+    <h3>過去のレース結果</h3>
+    <table>
+        <thead>
+            <tr>
+                <th>レース名</th>
+                <th>1位</th>
+                <th>2位</th>
+                <th>3位</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for result in past_results %}
+            <tr>
+                <td>{{ result.race_name }}</td>
+                <td>{{ result.first_place }}</td>
+                <td>{{ result.second_place }}</td>
+                <td>{{ result.third_place }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
+    <!-- 例: 馬の統計情報 -->
+    <h3>馬の統計情報</h3>
+    <p>こちらには、各馬の過去の成績や、勝率、平均オッズなどの統計情報を表示します。</p>
+    <table>
+        <thead>
+            <tr>
+                <th>馬名</th>
+                <th>勝率</th>
+                <th>平均オッズ</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for horse in horse_stats %}
+            <tr>
+                <td>{{ horse.name }}</td>
+                <td>{{ horse.win_rate }}%</td>
+                <td>{{ horse.avg_odds }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
+</body>
+</html>

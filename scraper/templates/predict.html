@@ -1,0 +1,12 @@
+{% extends "base.html" %}
+
+{% block content %}
+<h1>競馬予測入力</h1>
+
+<form method="post">
+    {% csrf_token %}
+    {{ form.as_table }}
+    <br>
+    <input type="submit" value="予測する">
+</form>
+{% endblock %}
