@@ -1,7 +1,8 @@
 {% extends "base.html" %}
 
 {% block content %}
-<h1>予測結果</h1>
+<h2>予測結果</h2>
+<p>予測された結果は: {{ prediction }}</p>
 
 <h2>レース名: {{ race_name }}</h2>
 <p>天気: {{ weather }}</p>
@@ -15,9 +16,9 @@
 </ul>
 
 <h3>予測結果</h3>
-<p>1位: {{ prediction.first_place }}</p>
-<p>2位: {{ prediction.second_place }}</p>
-<p>3位: {{ prediction.third_place }}</p>
+<p>1位: {{ first_place }}</p>
+<p>2位: {{ second_place }}</p>
+<p>3位: {{ third_place }}</p>
 
 <a href="{% url 'index' %}">トップページに戻る</a>
 {% endblock %}
